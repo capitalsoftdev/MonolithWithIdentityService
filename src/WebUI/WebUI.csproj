@@ -39,6 +39,8 @@
         <None Include="ClientApp\src\tsconfig.json" />
         <None Include="ClientApp\src\tsconfig.spec.json" />
         <None Include="ClientApp\src\tslint.json" />
+        <None Include="ClientApp\tsconfig.app.json" />
+        <None Include="ClientApp\tsconfig.spec.json" />
     </ItemGroup>
 
     <ItemGroup>
