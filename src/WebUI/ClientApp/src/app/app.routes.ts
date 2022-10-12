@@ -1,13 +1,11 @@
-import { HomeComponent } from './home/home.component';
-import {UserKeysComponent} from "./user-keys/user-keys.component";
-import {OrdersByGridComponent} from "./orders-by-grid/orders-by-grid.component";
 import {RouterModule, Routes} from "@angular/router";
+import {HomeComponent} from "./ui/components/home/home.component";
+import {AuthorizeComponent} from "./ui/components/authorize/authorize.component";
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'user-keys', component: UserKeysComponent },
-    { path: 'ordersByGrid', component: OrdersByGridComponent },
+  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'authorize', component: AuthorizeComponent},
 ];
 
-export const routing = RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' });
+export const routing = RouterModule.forRoot(appRoutes, {relativeLinkResolution: 'legacy'});

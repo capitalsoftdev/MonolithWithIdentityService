@@ -1,25 +1,21 @@
-<div *ngIf="!isAuthenticated; else authorizedApp" class="container">
-  Loading...
-</div>
-<ng-template #authorizedApp>
-  <div class="container">
-    <nav class="bg-dark mb-4 navbar navbar-dark navbar-expand-md">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a [routerLink]="['/']" class="navbar-brand">Client - {{userData['email']}}</a>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar">
-          <ul class="mr-auto navbar-nav">
-            <li class="nav-item"><a class="nav-link" routerLink="user-keys">User keys</a></li>
-            <li class="nav-item"><a class="nav-link" routerLink="ordersByGrid">Orders by grid</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://localhost:5001/swagger" target="_blank">Api</a></li>
-            <li class="nav-item"><a class="nav-link" (click)="logout()">Log out</a>
-            </li>
-          </ul>
-        </div>
+<div class="container">
+  <nav class="bg-dark mb-4 navbar navbar-dark navbar-expand-md">
+    <div class="container-fluid">
+      <div *ngIf="isAuthenticated" class="navbar-header">
+        <a [routerLink]="['/']" class="navbar-brand">Client - {{userData['email']}}</a>
       </div>
-    </nav>
-    <router-outlet></router-outlet>
-  </div>
-</ng-template>
+      <div class="navbar-collapse collapse" id="navbar">
+        <ul class="mr-auto navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="https://localhost:5001/swagger" target="_blank">Api</a></li>
+          <li class="nav-item"><a class="nav-link" *ngIf="isAuthenticated" (click)="logout()">Log out</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" *ngIf="!isAuthenticated" (click)="login()">Log in</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+
 

@@ -6,7 +6,7 @@ import {environment} from "../environments/environment";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent implements OnInit {
@@ -22,10 +22,7 @@ export class AppComponent implements OnInit {
     this.oidcSecurityService.checkAuth().subscribe(({isAuthenticated, userData}) => {
       this.isAuthenticated = isAuthenticated;
       this.userData = userData;
-      console.log(userData)
-      if (!isAuthenticated) {
-        this.oidcSecurityService.authorize();
-      }
+      console.log(this.isAuthenticated, userData)
     });
   }
 

@@ -16,8 +16,8 @@ export class BaseComponent implements OnDestroy {
     return this.form.controls;
   }
 
-  returnToClient() {
-    location.assign(AppConstant.ReturnUrl);
+  returnToClient(additionalPath:string = '') {
+    location.assign(AppConstant.ReturnUrl + additionalPath);
   }
 
   ngOnDestroy() {

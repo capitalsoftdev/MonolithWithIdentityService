@@ -3,20 +3,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable} from 'rxjs';
 import {OidcSecurityService} from 'angular-auth-oidc-client';
-import {OrdersByGrid} from "../models/OrderByGrid";
 
 @Injectable()
-export class DataService {
+export class TestService {
 
-  private actionUrl: string;
-  private actionUrlTest: string;
+  private readonly url: string = `api/Test`;
   private headers: HttpHeaders = new HttpHeaders();
-  private token = "";
 
   constructor(private http: HttpClient, private securityService: OidcSecurityService) {
-    this.actionUrl = `api/Binance`;
-    this.actionUrlTest = `api/Test`;
-
     //this.securityService.getAccessToken();
     //   .subscribe((data:any) => {
     //   console.log("AAAAAAAAAAAAAAAAAA", data);
@@ -38,22 +32,9 @@ export class DataService {
 
   public GetData = (): Observable<any> => {
     this.setHeaders();
-    return this.http.get(this.actionUrlTest + "/GetData", { headers: this.headers });
-  }
-  public GetData2 = (): Observable<any> => {
-    this.setHeaders();
-    return this.http.get(this.actionUrlTest + "/GetData2", { headers: this.headers });
+    return this.http.get(this.url + "/GetData", { headers: this.headers });
   }
 
-
-  public saveKeys = (apiKey:string,secretKey:string): Observable<any> => {
-    this.setHeaders();
-    return this.http.post(this.actionUrl + "/SaveUserKeys", {"apiKey":apiKey,"secretKey":secretKey}, {headers: this.headers});
-  }
-  public ordersByGrid = (cmd:OrdersByGrid): Observable<any> => {
-    this.setHeaders();
-    return this.http.post(this.actionUrl + "/OrdersByGrid", cmd, {headers: this.headers});
-  }
 
 
 }

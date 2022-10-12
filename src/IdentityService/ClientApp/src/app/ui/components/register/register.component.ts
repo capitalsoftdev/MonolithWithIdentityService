@@ -57,7 +57,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
     this.identityService.register(authModel)
       .subscribe({
         next: _ => {
-          this.returnToClient()
+          this.returnToClient("authorize")
         },
         error: error => {
           this.registerFailed = true;

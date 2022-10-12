@@ -37,6 +37,18 @@ else
     app.UseHsts();
 }
 
+app.UseCors(builderOptions =>
+{
+    builderOptions
+        .WithOrigins(new[]
+        {
+            "https://localhost:6001"
+        })
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+});
+
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseStaticFiles();

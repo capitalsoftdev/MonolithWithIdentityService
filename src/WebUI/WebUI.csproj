@@ -44,6 +44,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="ClientApp\src\app\core\enums" />
+      <Folder Include="ClientApp\src\app\providers\guards" />
+      <Folder Include="ClientApp\src\app\ui\components" />
+      <Folder Include="ClientApp\src\app\ui\modules" />
       <Folder Include="wwwroot\api" />
     </ItemGroup>
 

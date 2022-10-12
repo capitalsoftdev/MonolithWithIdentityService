@@ -4,11 +4,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {routing} from './app.routes';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {HomeComponent} from './home/home.component';
 import {AuthModule, LogLevel, OidcSecurityService} from 'angular-auth-oidc-client';
-import {DataService} from "./services/data.service";
-import {UserKeysComponent} from './user-keys/user-keys.component';
-import {OrdersByGridComponent} from './orders-by-grid/orders-by-grid.component';
+import {HomeComponent} from "./ui/components/home/home.component";
+import {TestService} from "./providers/services/test.service";
+import {AppConstant} from "./core/constants/app.constant";
+import { AuthorizeComponent } from './ui/components/authorize/authorize.component';
 
 
 // export function initialize(initializeService: InitializeService) {
@@ -27,7 +27,7 @@ import {OrdersByGridComponent} from './orders-by-grid/orders-by-grid.component';
     HttpClientModule,
     AuthModule.forRoot({
       config: {
-        authority: 'https://localhost:6001', // 'https://test10.capitalsoft.am', //debug 'https://localhost:6001'
+        authority: AppConstant.ReturnUrl,
         redirectUrl: window.location.origin,
         postLogoutRedirectUri: window.location.origin,
         clientId: 'angularclient',
@@ -46,11 +46,10 @@ import {OrdersByGridComponent} from './orders-by-grid/orders-by-grid.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    UserKeysComponent,
-    OrdersByGridComponent
+    AuthorizeComponent,
   ],
   providers: [
-    DataService,
+    TestService,
     OidcSecurityService
     // InitializeService,
     // {provide: APP_INITIALIZER, useFactory: initialize, deps: [InitializeService], multi: true}

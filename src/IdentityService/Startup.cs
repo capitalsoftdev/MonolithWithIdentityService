@@ -271,8 +271,7 @@ public class Startup
             builder
                 .WithOrigins(new[]
                 {
-                    "https://localhost:5001",
-                    "https://bot.capitalsoft.am"
+                    "https://localhost:5001"
                 })
                 .AllowAnyHeader()
                 .AllowAnyMethod()

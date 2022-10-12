@@ -59,7 +59,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.identityService.login(authModel)
       .subscribe({
         next: _ => {
-          this.returnToClient()
+          this.returnToClient("authorize")
         },
         error: error => {
           this.loginFailed = true;
