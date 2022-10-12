@@ -5,11 +5,10 @@
 /dist-server
 /tmp
 /out-tsc
-/.angular/cache/
 
 # dependencies
 /node_modules
-
+/.angular
 # IDEs and editors
 /.idea
 .project

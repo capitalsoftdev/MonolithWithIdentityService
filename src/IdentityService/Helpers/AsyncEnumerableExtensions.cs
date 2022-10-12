@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpeniddictServer.Helpers;
+namespace IdentityService.Helpers;
 
 public static class AsyncEnumerableExtensions
 {

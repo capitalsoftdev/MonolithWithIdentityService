@@ -1,46 +1,64 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {NgModule, APP_INITIALIZER} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {routing} from './app.routes';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HomeComponent} from './home/home.component';
+import {AuthModule, LogLevel, OidcSecurityService} from 'angular-auth-oidc-client';
+import {DataService} from "./services/data.service";
+import {UserKeysComponent} from './user-keys/user-keys.component';
+import {OrdersByGridComponent} from './orders-by-grid/orders-by-grid.component';
 
-import { ModalModule } from 'ngx-bootstrap/modal';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { TodoComponent } from './todo/todo.component';
-import { TokenComponent } from './token/token.component';
-
-import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// export function initialize(initializeService: InitializeService) {
+//   return (): Promise<any> => {
+//     return initializeService.Init();
+//   }
+// }
 
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    routing,
+    HttpClientModule,
+    AuthModule.forRoot({
+      config: {
+        authority: 'https://localhost:6001', // 'https://test10.capitalsoft.am', //debug 'https://localhost:6001'
+        redirectUrl: window.location.origin,
+        postLogoutRedirectUri: window.location.origin,
+        clientId: 'angularclient',
+        scope: 'openid profile email dataEventRecords offline_access',
+        responseType: 'code',
+        silentRenew: true,
+        autoUserInfo:true,
+        ignoreNonceAfterRefresh: true,
+        renewTimeBeforeTokenExpiresInSeconds: 10,
+        useRefreshToken: true,
+        logLevel: LogLevel.Debug,
+
+      },
+    }),
+  ],
   declarations: [
     AppComponent,
-    NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    TodoComponent,
-    TokenComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ModalModule.forRoot()
+    UserKeysComponent,
+    OrdersByGridComponent
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
+    DataService,
+    OidcSecurityService
+    // InitializeService,
+    // {provide: APP_INITIALIZER, useFactory: initialize, deps: [InitializeService], multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+
+export class AppModule {
+  constructor() {
+  }
+}

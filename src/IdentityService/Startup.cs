@@ -1,26 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using IdentityService.Data;
+using Microsoft.AspNetCore.Identity;
 using Quartz;
-using OpeniddictServer.Data;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Microsoft.AspNetCore.Http;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.Extensions.Options;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography;
-using App.Application;
-using App.Domain.Entities;
-using App.Infrastructure;
-using App.Infrastructure.Identity;
-using App.Infrastructure.Persistence;
-using IdentityService;
-using static System.Net.WebRequestMethods;
-using File = System.IO.File;
+using Microsoft.EntityFrameworkCore;
 
 namespace IdentityService;
 
@@ -72,7 +57,7 @@ public class Startup
             // Configure the context to use Microsoft SQL Server.
             options
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-
+        
             // Register the entity sets needed by OpenIddict.
             // Note: use the generic overload if you need
             // to replace the default OpenIddict entities.
@@ -191,7 +176,7 @@ public class Startup
                 // Note: call ReplaceDefaultEntities() to replace the default OpenIddict entities.
                 options.UseEntityFrameworkCore()
                     .UseDbContext<ApplicationDbContext>();
-
+            
                 // Enable Quartz.NET integration.
                 options.UseQuartz();
             })

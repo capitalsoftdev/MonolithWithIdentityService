@@ -1,4 +1,4 @@
-﻿namespace OpeniddictServer.Data;
+﻿namespace IdentityService.Data;
 
 public class AuthModel
 {

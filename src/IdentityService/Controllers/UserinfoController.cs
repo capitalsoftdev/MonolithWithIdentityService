@@ -1,18 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using App.Domain.Entities;
-using App.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
-using OpeniddictServer.Data;
+using IdentityService.Data;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace OpeniddictServer.Controllers;
+namespace IdentityService.Controllers;
 
 public class UserinfoController : Controller
 {

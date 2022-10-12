@@ -1,27 +1,19 @@
+using App.Application.Common.Interfaces;
 using App.Infrastructure;
 using App.WebUI;
 using App.Infrastructure.Persistence;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
+var configuration = builder.Configuration;
 
 // Add services to the container.
-builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddWebUIServices();
+services.AddApplicationServices();
+services.AddInfrastructureServices(configuration);
+services.AddWebUIServices();
 
-builder.Services.AddOpenIddict()
-
-    // Register the OpenIddict core components.
-    .AddCore(options =>
-    {
-        // Configure OpenIddict to use the Entity Framework Core stores and models.
-        // Note: call ReplaceDefaultEntities() to replace the default OpenIddict entities.
-        options.UseEntityFrameworkCore()
-            .UseDbContext<ApplicationDbContext>();
-
-        // Enable Quartz.NET integration.
-        //options.UseQuartz();
-    }).AddServer();
 
 var app = builder.Build();
 
@@ -34,7 +26,7 @@ if (app.Environment.IsDevelopment())
     // Initialise and seed database
     using (var scope = app.Services.CreateScope())
     {
-        var seed = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        var seed = scope.ServiceProvider.GetRequiredService<ApplicationDbContextSeed>();
         await seed.InitialiseAsync();
         await seed.SeedAsync();
     }
@@ -57,16 +49,33 @@ app.UseSwaggerUi3(settings =>
 
 app.UseRouting();
 
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseSpaStaticFiles();
+}
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapDefaultControllerRoute();
+    //endpoints.MapRazorPages();
+    //endpoints.MapFallbackToFile("index.html");
+});
 
-app.MapRazorPages();
+app.UseSpa(spa =>
+{
+    spa.Options.SourcePath = "ClientApp";
 
-app.MapFallbackToFile("index.html");
-;
+    if (app.Environment.IsDevelopment())
+    {
+        spa.UseAngularCliServer(npmScript: "start");
+        //spa.UseProxyToSpaDevelopmentServer(Configuration["SpaBaseUrl"] ?? "http://localhost:4200");
+    }
+});
 
 app.Run();

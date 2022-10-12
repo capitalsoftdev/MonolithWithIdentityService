@@ -1,0 +1,14 @@
+<form [formGroup]="form" novalidate action="" name="form" (ngSubmit)="submit()">
+  <div class="form_div">
+  <div class="inputs"><input type="text" formControlName="pair" placeholder="Pair"></div>
+  <div class="inputs"><input type="text" formControlName="side" placeholder="Side( BUY / SELL)"></div>
+  <div class="inputs"><input type="text" formControlName="amount" placeholder="Amount"></div>
+  <div class="inputs"><input type="text" formControlName="ordersCount" placeholder="Orders Count"></div>
+  <div class="inputs"><input type="text" formControlName="minPrice" placeholder="Min Price"></div>
+  <div class="inputs"><input type="text" formControlName="maxPrice" placeholder="Max Price"></div>
+  <div class="inputs"><input type="text" formControlName="stopPrice" placeholder="Stop Price"></div>
+  <div class="inputs"><input type="text" formControlName="stopLimitPrice" placeholder="Stop Limit Price"></div>
+    <div class="btnDiv"><button type="submit">Create orders</button></div>
+
+  </div>
+</form>

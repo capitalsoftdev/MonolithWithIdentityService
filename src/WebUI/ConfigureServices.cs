@@ -1,5 +1,7 @@
-﻿using App.WebUI.Filters;
+﻿using App.Application.Common.Interfaces;
+using App.WebUI.Filters;
 using App.Infrastructure.Persistence;
+using App.WebUI.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
@@ -13,7 +15,7 @@ public static class ConfigureServices
     {
         services.AddDatabaseDeveloperPageExceptionFilter();
 
-        //services.AddSingleton<ICurrentUserService, CurrentUserService>();
+        services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
         services.AddHttpContextAccessor();
 
@@ -44,6 +46,8 @@ public static class ConfigureServices
             configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
         });
 
+        services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
+        
         return services;
     }
 }

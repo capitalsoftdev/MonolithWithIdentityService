@@ -1,10 +1,8 @@
-﻿using App.Domain.Entities;
-using App.Infrastructure.Identity;
+﻿using IdentityService.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OpeniddictServer.Data;
 
-namespace OpeniddictServer.Controllers;
+namespace IdentityService.Controllers;
 
 [Route("[controller]")]
 [ApiController]

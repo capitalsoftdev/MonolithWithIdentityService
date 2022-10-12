@@ -1,25 +1,19 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using App.Domain.Entities;
-using App.Infrastructure.Identity;
+using IdentityService.Helpers;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using OpenIddict.Validation.AspNetCore;
-using OpeniddictServer.Data;
-using OpeniddictServer.Helpers;
+using IdentityService.Data;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
-namespace OpeniddictServer.Controllers;
+namespace IdentityService.Controllers;
 
 public class AuthorizationController : Controller
 {
