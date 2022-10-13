@@ -8,7 +8,6 @@ import {AuthModule, LogLevel, OidcSecurityService} from 'angular-auth-oidc-clien
 import {HomeComponent} from "./ui/components/home/home.component";
 import {TestService} from "./providers/services/test.service";
 import {AppConstant} from "./core/constants/app.constant";
-import { AuthorizeComponent } from './ui/components/authorize/authorize.component';
 
 
 // export function initialize(initializeService: InitializeService) {
@@ -46,7 +45,6 @@ import { AuthorizeComponent } from './ui/components/authorize/authorize.componen
   declarations: [
     AppComponent,
     HomeComponent,
-    AuthorizeComponent,
   ],
   providers: [
     TestService,

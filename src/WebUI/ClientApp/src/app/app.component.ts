@@ -23,6 +23,10 @@ export class AppComponent implements OnInit {
       this.isAuthenticated = isAuthenticated;
       this.userData = userData;
       console.log(this.isAuthenticated, userData)
+
+      if (!this.isAuthenticated) {
+        this.oidcSecurityService.authorize();
+      }
     });
   }
 
@@ -32,6 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   logout(): void {
+    localStorage.setItem("isOnline", "false");
     this.oidcSecurityService.logoffLocal();
     this.oidcSecurityService.logoff();
   }

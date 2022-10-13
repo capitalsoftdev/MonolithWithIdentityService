@@ -8,7 +8,7 @@ import {AuthModel} from "../../../core/models/auth.model";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent extends BaseComponent implements OnInit {
   loading = false;
@@ -57,7 +57,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
     this.identityService.register(authModel)
       .subscribe({
         next: _ => {
-          this.returnToClient("authorize")
+          this.returnToClient();
         },
         error: error => {
           this.registerFailed = true;

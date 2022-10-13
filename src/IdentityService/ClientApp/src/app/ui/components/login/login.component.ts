@@ -9,7 +9,7 @@ import {AuthModel} from "../../../core/models/auth.model";
   {
     selector: 'app-login',
     templateUrl: 'login.component.html',
-    styleUrls: ['login.component.css']
+    styleUrls: ['login.component.scss']
   })
 export class LoginComponent extends BaseComponent implements OnInit {
   loading = false;
@@ -59,7 +59,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.identityService.login(authModel)
       .subscribe({
         next: _ => {
-          this.returnToClient("authorize")
+          this.returnToClient();
         },
         error: error => {
           this.loginFailed = true;
